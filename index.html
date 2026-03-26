@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simon Nilsson | The Vigheim Saga</title>
+  <meta name="description" content="Official author site for Simon Nilsson, author of The Vigheim Saga." />
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0b0b0b;
+      --text: #f3eee7;
+      --muted: #9f9a92;
+      --line: rgba(150, 23, 23, 0.85);
+      --line-soft: rgba(150, 23, 23, 0.28);
+      --button: #8d1717;
+      --button-hover: #a41b1b;
+      --border: rgba(255,255,255,0.08);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(110, 0, 0, 0.18), transparent 28%),
+        linear-gradient(180deg, #040404 0%, #050505 100%);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(5, 5, 5, 0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 1.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.82rem;
+    }
+
+    .nav-links a {
+      color: #b9b2a8;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.accent {
+      color: #b91c1c;
+    }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 0 100px;
+    }
+
+    .eyebrow,
+    .section-eyebrow {
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.45em;
+      color: #b21d1d;
+      font-size: 0.82rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 8vw, 7rem);
+      line-height: 0.98;
+      margin-top: 22px;
+      margin-bottom: 18px;
+    }
+
+    .divider {
+      width: 92px;
+      height: 2px;
+      background: var(--line);
+      margin: 26px auto 30px;
+    }
+
+    .hero-copy {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      color: #b7b0a6;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(1.08rem, 2vw, 1.35rem);
+      line-height: 1.7;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 38px;
+    }
+
+    .btn {
+      min-width: 245px;
+      padding: 16px 24px;
+      border: 1px solid var(--border);
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--button);
+      border-color: rgba(255,255,255,0.03);
+    }
+
+    .btn-primary:hover { background: var(--button-hover); }
+
+    .btn-secondary {
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .section {
+      padding: 110px 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 54px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.1rem, 5vw, 3.5rem);
+      margin-top: 14px;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: minmax(240px, 320px) 1fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .cover {
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1 / 1.55;
+      border: 1px solid var(--border);
+      background: linear-gradient(160deg, #151515 0%, #080808 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 22px 55px rgba(0,0,0,0.45);
+    }
+
+    .book-meta h3 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 12px;
+    }
+
+    .book-tag {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #b91c1c;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.84rem;
+      margin-bottom: 18px;
+    }
+
+    .book-description,
+    .about-copy,
+    .contact-copy {
+      color: #b9b2a8;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .book-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .small-btn {
+      padding: 14px 20px;
+      border: 1px solid var(--border);
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.86rem;
+    }
+
+    .small-btn.primary { background: var(--button); }
+    .small-btn.primary:hover { background: var(--button-hover); }
+    .small-btn.secondary:hover { background: rgba(255,255,255,0.02); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.005));
+      padding: 34px;
+    }
+
+    .card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+    }
+
+    .list {
+      margin: 20px 0 0;
+      padding-left: 18px;
+      color: #b9b2a8;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .list li { margin-bottom: 10px; }
+
+    .footer {
+      padding: 38px 0 60px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 920px) {
+      .book-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px 0;
+      }
+
+      .nav-links {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      .hero { padding: 60px 0 70px; }
+      .section { padding: 78px 0; }
+      .btn, .small-btn { width: 100%; }
+      .card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand">Simon Nilsson</a>
+      <nav class="nav-links">
+        <a href="#books">Books</a>
+        <a href="#about">About</a>
+        <a href="#contact">Instagram</a>
+        <a href="#buy" class="accent">Amazon</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Dark Fantasy Author</div>
+        <h1>Simon Nilsson</h1>
+        <div class="divider"></div>
+        <p class="hero-copy">
+          Writing brutal, dark fantasy forged in Norse inspiration — stories of sacrifice,
+          strength, and the price of survival in worlds that show no mercy.
+        </p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="https://www.amazon.com/stores/Simon-Nilsson/author/B0GLR4H3XT?ref=ap_rdr&shoppingPortalEnabled=true&ccs_id=e2249c8d-265e-41d9-8c36-2858cf72880c" target="_blank" rel="noopener noreferrer">Amazon Author Page ↗</a>
+          <a class="btn btn-secondary" href="https://www.goodreads.com/author/show/68416186.Simon_Nilsson" target="_blank" rel="noopener noreferrer">Goodreads Profile ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="books" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Discover</div>
+          <h2>The Books</h2>
+        </div>
+
+        <div class="book-grid">
+          <div class="cover" aria-label="Book cover">
+            <img src="book-cover.jpg" alt="The Vigheim Saga cover" style="width:100%; height:100%; object-fit:cover; display:block;" />
+          </div>
+
+          <div class="book-meta">
+            <div class="book-tag">Dark Viking Fantasy</div>
+            <h3>Valheim: Strength Is Never Free</h3>
+            <p class="book-description">
+              A grim, brutal fantasy with Norse roots, written for readers who want hard choices,
+              ruthless combat, rising power, and a world where strength always comes at a cost.
+            </p>
+            <p class="book-description">
+              Follow Tyr through a world of Thralls, Runebound, blood, winter, and survival — where
+              every step upward demands sacrifice, and mercy rarely lives long.
+            </p>
+            <div class="book-actions" id="buy">
+              <a class="small-btn primary" href="https://www.amazon.com/stores/Simon-Nilsson/author/B0GLR4H3XT?ref=ap_rdr&shoppingPortalEnabled=true&ccs_id=e2249c8d-265e-41d9-8c36-2858cf72880c" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+              <a class="small-btn secondary" href="https://www.goodreads.com/author/show/68416186.Simon_Nilsson" target="_blank" rel="noopener noreferrer">View on Goodreads</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Author</div>
+          <h2>About Simon Nilsson</h2>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>The Work</h3>
+            <p class="about-copy">
+              Simon Nilsson writes dark fantasy with a hard edge — stories shaped by violence,
+              consequence, loyalty, and the cost of becoming stronger. The world of The Vigheim Saga
+              draws heavily from Norse atmosphere, brutal survival, and myth-soaked conflict.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>What You’ll Find Here</h3>
+            <ul class="list">
+              <li>Book updates and release information</li>
+              <li>Links to Amazon, Goodreads, and social media</li>
+              <li>Series information for The Vigheim Saga</li>
+              <li>A direct home for readers looking to follow the journey</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Follow</div>
+          <h2>Find Me Online</h2>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>Instagram</h3>
+            <p class="contact-copy">
+              Follow for book updates, artwork, launch news, and posts connected to The Vigheim Saga.
+            </p>
+            <div class="book-actions">
+              <a class="small-btn primary" href="https://www.instagram.com/s.n.author?igsh=MXZiaTNmY3pvam82dA==" target="_blank" rel="noopener noreferrer">Open Instagram</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Reader Links</h3>
+            <p class="contact-copy">
+              Keep your main reading links in one place so visitors can move straight to Amazon,
+              Goodreads, or future books in the series.
+            </p>
+            <div class="book-actions">
+              <a class="small-btn secondary" href="https://www.amazon.com/stores/Simon-Nilsson/author/B0GLR4H3XT?ref=ap_rdr&shoppingPortalEnabled=true&ccs_id=e2249c8d-265e-41d9-8c36-2858cf72880c" target="_blank" rel="noopener noreferrer">Amazon</a>
+              <a class="small-btn secondary" href="https://www.goodreads.com/author/show/68416186.Simon_Nilsson" target="_blank" rel="noopener noreferrer">Goodreads</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> Simon Nilsson. All rights reserved. <span style="opacity:0.5;">|</span> The Vigheim Saga
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
